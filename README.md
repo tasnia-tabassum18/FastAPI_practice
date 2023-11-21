@@ -1,4 +1,3 @@
-# FastAPI_practice
 <h1>Setup</h1>
 <h3>Set up your virtual environment</h3>
 
