@@ -40,3 +40,20 @@ async def get_food_name(food_name:FoodEnum):
     if food_name == FoodEnum.fruits:
         return{"food_name":food_name, "message":"good to eat fruits"}
     return{"food_name":food_name, "message":"I like dairy"}
+#query parameters
+
+fake_items_db = [{"item_name":"Shirt"},{"item_name":"Sweatpants"},{"item_name":"Shoes"}]
+@app.get("/items")
+async def list_items(skip: int= 0,limit:int = 10):
+    return fake_items_db[skip: skip+limit]
+#make parameters optional
+@app.get("/items/{item_id}")
+async def get_item(item_id:str,q:Optional[str]= None, short: bool = False):
+    item = {"item_id":item_id}
+    if q:
+        # return {"item_id":item_id,"q":q}
+        return item.update({"q":q})
+    if not short:
+        item.update({"description":"This is the description"})
+    return {"item_id":item_id}
+
